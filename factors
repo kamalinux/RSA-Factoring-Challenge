@@ -1,0 +1,29 @@
+#!/usr/bin/python3
+
+from sys import argv
+from math import sqrt
+
+
+def open_file(file_name):
+    """Read from file and add to array"""
+    with open(file_name, encoding="utf-8") as file:
+        lines = file.readlines()
+    number_to_factor = []
+
+    for line in lines:
+        number_to_factor.append(int(line))
+    return number_to_factor
+
+def factor(n):
+    """Factor each n"""
+    for i in range(2, n):
+        print("{}={}*{}".format(n, (n // i), i))
+        break
+
+def factor_list(ls):
+    """Factor each number in ls"""
+    for i in ls:
+        factor(i)
+
+if len(argv) == 2:
+    factor_list(open_file(argv[1]))
