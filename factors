@@ -4,31 +4,29 @@
 Factorize as many numbers as possible into a product of two smaller numbers."""
 
 from sys import argv
-from math import sqrt
 
 
-def open_file(file_name):
-    """Read from file and add to array"""
-    with open(file_name, encoding="utf-8") as file:
-        lines = file.readlines()
-    number_to_factor = []
-    for line in lines:
-        number_to_factor.append(int(line))
-    return number_to_factor
+def factorize(value):
+    """"print a simple descomposition of an integer > 1"""
+    i = 2
 
+    if value < 2:
+        return
+    while value % i:
+        i += 1
+    print("{}={:.0f}*{}".format(value, (value / i), i))
 
-def factor(n):
-    """Factor each n"""
-    for i in range(2, n):
-        print("{}={}*{}".format(n, (n // i), i))
-        break
+if len(argv) != 2:
+    exit()
 
+try:
+    with open(argv[1]) as file:
+        """Read from file"""
+        line = file.readline()
 
-def factor_list(ls):
-    """Factor each number in ls"""
-    for i in ls:
-        factor(i)
-
-
-if len(argv) == 2:
-    factor_list(open_file(argv[1]))
+        while line != "":
+            value = int(line.split('\n')[0])
+            factorize(value)
+            line = file.readline()
+except:
+    pass
